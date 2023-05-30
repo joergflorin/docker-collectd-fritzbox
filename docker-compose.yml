@@ -24,14 +24,13 @@ services:
     networks:
       - monitoring
     container_name: monitoring-collectd-fritzbox
+    env_file:
+      - ./.env
     environment:
-      - TIMEZONE=Europe/Berlin
-      - CheckInterval=10
-      - InfluxDbIp=influxdb-collectd
-      - InfluxDbCollectdPort=25826
-      - FritzBoxIp=${FRITZ_IP}
-      - FritzBoxUser=${FRITZ_USER}
-      - FritzBoxPassword=${FRITZ_PASS}
+      TIMEZONE: Europe/Berlin
+      CheckInterval: 10
+      InfluxDbIp: influxdb-collectd
+      InfluxDbCollectdPort: 25826
     depends_on:
       - influxdb
 
@@ -41,4 +40,3 @@ volumes:
 networks:
   monitoring:
     external: true
-
